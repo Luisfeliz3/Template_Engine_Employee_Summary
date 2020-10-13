@@ -4,10 +4,9 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
-
+const chalk = require("chalk");
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
-
 const render = require("./lib/htmlRenderer");
 
 
@@ -35,7 +34,10 @@ const render = require("./lib/htmlRenderer");
 // for the provided `render` function to work! ```
 
 
-class app{
+ 
+
+
+class Team{
   constructor(id, name, employeeType,email){
     this.id = id;
     this.name = name;
@@ -44,8 +46,43 @@ class app{
     
   }
 
-
-
+ 
+create(){
+    inquirer
+    .prompt([
+      {
+        type: "confirm",
+        name: "choice",
+        message: "Are you ready to set up your dev team ?"
+      }
+    ])
+    .then(val => {
+        if (val.choice) {
+            this.manager();
+          } else {
+            this.quit();
+          }
+    });
 
 
 }
+  // Logs goodbye and exits the node app
+  quit() {
+    console.log("\nGoodbye!");
+    process.exit(0);
+  }
+
+
+  manager() {
+    console.log("\nLet's get Ypur manger!!");
+
+  }
+
+}
+
+const team = new Team();
+
+team.create();
+
+module.exports = Team;
+
