@@ -4,6 +4,14 @@ const Employee = require("../lib/Employee");
 
 class Engineer extends Employee {
      
+        constructor(github){
+            this.github = github;
 
+        }
+
+getRole() {
+// Overridden to return 'Engineer'
+
+}
 
 }

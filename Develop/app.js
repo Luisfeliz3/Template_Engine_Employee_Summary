@@ -37,7 +37,7 @@ const render = require("./lib/htmlRenderer");
 
 class app{
   constructor(id, name, employeeType,email){
-      this.id = id;
+    this.id = id;
     this.name = name;
     this.employeeType = employeeType;
     this.email = email;
