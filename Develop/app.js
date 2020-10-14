@@ -9,7 +9,6 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 
-
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
@@ -33,51 +32,124 @@ const render = require("./lib/htmlRenderer");
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
 
-
- 
-
-
-class Team{
-  constructor(id, name, employeeType,email){
+class Team {
+  constructor(id, name, employeeType, email) {
     this.id = id;
     this.name = name;
     this.employeeType = employeeType;
     this.email = email;
-    
   }
 
- 
-create(){
+  create() {
     inquirer
-    .prompt([
-      {
-        type: "confirm",
-        name: "choice",
-        message: "Are you ready to set up your dev team ?"
-      }
-    ])
-    .then(val => {
+      .prompt([
+        {
+          type: "confirm",
+          name: "choice",
+          message: "Are you ready to set up your dev team ?",
+        },
+      ])
+      .then((val) => {
         if (val.choice) {
-            this.manager();
-          } else {
-            this.quit();
-          }
-    });
+          this.choiceOfRoles();
+        } else {
+          this.quit();
+        }
+      });
+  }
 
-
-}
   // Logs goodbye and exits the node app
   quit() {
-    console.log("\nGoodbye!");
+    console.log(chalk.red("\nThe app has EXITED !! Goodbye!"));
     process.exit(0);
   }
 
-
-  manager() {
-    console.log("\nLet's get Ypur manger!!");
-
+  choiceOfRoles() {
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "id",
+          message: "What is the Employee's Id ... ?",
+        },
+        {
+          type: "input",
+          name: "name",
+          message: "What is the Employee's name ... ?",
+        },
+        {
+          type: "input",
+          name: "email",
+          message: "What is the Employee's email ... ?",
+        },
+        {
+          type: "list",
+          name: "roles",
+          message: "Which Role would you like to add this team member to?",
+          choices: ["Manager", "Engineer", "Intern"],
+        },
+      ])
+      .then((val) => {
+        console.log(val);
+        switch (val.roles) {
+          case "Manager":
+            this.manager(val);
+            break;
+          case "Engineer":
+            this.engineer(val);
+            break;
+          case "Intern":
+            this.intern(val);
+            break;
+          default:
+            break;
+        }
+      });
   }
 
+  askMangerQuestion() {}
+
+  manager(manager) {
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "officeNum",
+          message: "What is your office number ?",
+        },
+      ])
+      .then((val) => {
+        console.log(val, manager);
+      });
+  }
+
+  intern(intern) {
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "school",
+          message: "What School do you attend ?",
+        },
+      ])
+      .then((val) => {
+        console.log(val, intern);
+      });
+  }
+
+  engineer(engineer) {
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "officeNum",
+          message: "What is your git hub user name ?",
+        },
+      ])
+      .then((val) => {
+        console.log(val, engineer);
+      });
+  }
 }
 
 const team = new Team();
@@ -85,4 +157,3 @@ const team = new Team();
 team.create();
 
 module.exports = Team;
-

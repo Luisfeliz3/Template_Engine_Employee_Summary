@@ -8,13 +8,13 @@ class Intern extends Employee {
     }
 
 getSchool() {
-
+        return this.school;
 
 }
 
 getRole() {
 
-    // Overridden to return 'Intern'
+    return 'Intern'
 }
 
 
