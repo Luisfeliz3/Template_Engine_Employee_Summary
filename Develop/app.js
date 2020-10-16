@@ -143,7 +143,9 @@ class Team {
         // console.log(val, intern);
         const teamIntern = new Intern(intern.name, intern.roles, intern.id ,intern.email,val.school);
         internArr.push(teamIntern);
-        render(teamIntern);
+        render(internArr);
+        console.log(render(internArr));
+
       });
   }
 
@@ -159,8 +161,10 @@ class Team {
       .then((val) => {
         // console.log(val, engineer);
         const teamEngineer = new Engineer(engineer.name, engineer.roles, engineer.id ,engineer.email,val.gitHub);
-        internArr.push(teamEngineer);
-        render(internArr);
+        engineerArr.push(teamEngineer);
+        render(engineerArr);
+        console.log(render(engineerArr));
+
 
       });
   }
@@ -169,8 +173,6 @@ class Team {
 const team = new Team();
 
 team.create();
-
-
 
 
 module.exports = Team;
