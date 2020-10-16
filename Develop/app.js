@@ -31,15 +31,15 @@ const render = require("./lib/htmlRenderer");
 // for further information. Be sure to test out each class and verify it generates an
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
-
+const managerArr = [];
+const engineerArr = [];
+const internArr = [];
 class Team {
-  constructor(id, name, employeeType, email) {
-    this.id = id;
-    this.name = name;
-    this.employeeType = employeeType;
-    this.email = email;
+  constructor(team) {
+    this.team = team;
   }
 
+  
   create() {
     inquirer
       .prompt([
@@ -60,7 +60,7 @@ class Team {
 
   // Logs goodbye and exits the node app
   quit() {
-    console.log(chalk.red("\nThe app has EXITED !! Goodbye!"));
+    // console.log(chalk.red("\nThe app has EXITED !! Goodbye!"));
     process.exit(0);
   }
 
@@ -90,7 +90,7 @@ class Team {
         },
       ])
       .then((val) => {
-        console.log(val);
+        // console.log(val);
         switch (val.roles) {
           case "Manager":
             this.manager(val);
@@ -119,7 +119,12 @@ class Team {
         },
       ])
       .then((val) => {
-        console.log(val, manager);
+        // console.log(val.officeNum);
+        // console.log(manager.name + manager.roles + manager.id + manager.email);
+        // name, employeeType, id, email
+      const teamManager = new Manager(manager.name, manager.roles, manager.id ,manager.email,val.officeNum);
+      managerArr.push(teamManager)
+
       });
   }
 
@@ -133,7 +138,9 @@ class Team {
         },
       ])
       .then((val) => {
-        console.log(val, intern);
+        // console.log(val, intern);
+        const teamIntern = new Intern(intern.name, intern.roles, intern.id ,intern.email,val.school);
+        internArr.push(teamIntern)
       });
   }
 
@@ -147,7 +154,9 @@ class Team {
         },
       ])
       .then((val) => {
-        console.log(val, engineer);
+        // console.log(val, engineer);
+        const teamEngineer = new Engineer(engineer.name, engineer.roles, engineer.id ,engineer.email,val.gitHub);
+        internArr.push(teamEngineer);
       });
   }
 }
@@ -155,5 +164,7 @@ class Team {
 const team = new Team();
 
 team.create();
+render(managerArr);
+
 
 module.exports = Team;
