@@ -119,12 +119,14 @@ class Team {
         },
       ])
       .then((val) => {
-        // console.log(val.officeNum);
+         
         // console.log(manager.name + manager.roles + manager.id + manager.email);
         // name, employeeType, id, email
       const teamManager = new Manager(manager.name, manager.roles, manager.id ,manager.email,val.officeNum);
       managerArr.push(teamManager)
-
+      render(managerArr);
+      console.log(render(managerArr));
+    
       });
   }
 
@@ -140,7 +142,8 @@ class Team {
       .then((val) => {
         // console.log(val, intern);
         const teamIntern = new Intern(intern.name, intern.roles, intern.id ,intern.email,val.school);
-        internArr.push(teamIntern)
+        internArr.push(teamIntern);
+        render(teamIntern);
       });
   }
 
@@ -157,6 +160,8 @@ class Team {
         // console.log(val, engineer);
         const teamEngineer = new Engineer(engineer.name, engineer.roles, engineer.id ,engineer.email,val.gitHub);
         internArr.push(teamEngineer);
+        render(internArr);
+
       });
   }
 }
@@ -164,7 +169,8 @@ class Team {
 const team = new Team();
 
 team.create();
-render(managerArr);
+
+
 
 
 module.exports = Team;

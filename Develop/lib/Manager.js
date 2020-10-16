@@ -13,7 +13,7 @@ return 'Manager'
 }
 
 
-getOffice(){
+getOfficeNumber(){
   return this.officeNumber;
 }
 

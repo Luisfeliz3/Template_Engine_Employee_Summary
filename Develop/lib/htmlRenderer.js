@@ -2,7 +2,7 @@ const path = require("path");
 const fs = require("fs");
 
 const templatesDir = path.resolve(__dirname, "../templates");
-
+console.log("We are on the WAY TO RTHAR QQQ!!!!!S");
 const render = employees => {
   const html = [];
   html.push(employees
