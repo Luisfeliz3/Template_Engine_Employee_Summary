@@ -29,7 +29,9 @@ const renderManager = manager => {
   template = replacePlaceholders(template, "email", manager.getEmail());
   template = replacePlaceholders(template, "id", manager.getId());
   template = replacePlaceholders(template, "officeNumber", manager.getOfficeNumber());
+  // console.log(template + "This is the template for!!!!!!!!!!!!!!!!!");
   return template;
+ 
 };
 
 const renderEngineer = engineer => {
@@ -53,6 +55,7 @@ const renderIntern = intern => {
 };
 
 const renderMain = html => {
+  console.log(templatesDir + "RENDERING MAIN");
   const template = fs.readFileSync(path.resolve(templatesDir, "main.html"), "utf8");
   return replacePlaceholders(template, "team", html);
 };
