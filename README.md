@@ -35,14 +35,14 @@ the application will create an HTML file that displays a nicely formatted team r
 - [Questions](#questions)
 
 ## Installation
- Clone Repo, Run Command `npm i`, Then node app.js
+ Clone Repo, Run Command `npm i`, Then `node app.js` to run program.
 
  ## Usage
  This application will generate a team employee summary page. 
 Run Command `npm start`, Follow the command line, Html  will be generated.
 
 ## License
-![badge](https://img.shields.io/badge/license-Open-brightgreen)
+![badge](https://img.shields.io/badge/license-Open-brightgreen) 
 
 <br/>
 This application is covered by the Open license. 
