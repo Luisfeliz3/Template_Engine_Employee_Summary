@@ -1,10 +1,14 @@
-### Template_Engine_Employee_Summary
 
 
-## DESCRIPTION
+# TEMPLATE ENGINE EMPLOYEE SALARY
+
+<br />
+
+<br />
+##  DESCRIPTION
 
 
-
+<br />
 
 A software engineering team generator command line application. 
 The application will prompt the user for information about the team manager and then information about the team members. 
@@ -23,34 +27,35 @@ the application will create an HTML file that displays a nicely formatted team r
 
 
 
-## Table of Contents
-- [DESCRIPTION](#description)
-- [FUNCTIONALITY](#functionality)
-- [Table of Contents](#table-of-contents)
-- [Installation](#installation)
-- [Usage](#usage)
-- [License](#license)
-- [Contributing](#contributing)
-- [Tests](#tests)
-- [Questions](#questions)
+## TABLE OF CONTENTS
+- [TEMPLATE ENGINE EMPLOYEE SALARY](#template-engine-employee-salary)
+  - [DESCRIPTION](#description)
+  - [FUNCTIONALITY](#functionality)
+  - [TABLE OF CONTENTS](#table-of-contents)
+  - [INSTALLATION](#installation)
+  - [USAGE](#usage)
+  - [LICENSE](#license)
+  - [Contributing](#contributing)
+  - [TEST](#test)
+  - [QUESTIONS](#questions)
 
-## Installation
+## INSTALLATION
  Clone Repo, Run Command `npm i`, Then `node app.js` to run program.
 
- ## Usage
+ ## USAGE
  This application will generate a team employee summary page. 
 Run Command `npm start`, Follow the command line, Html  will be generated.
 
-## License
+## LICENSE
 ![badge](https://img.shields.io/badge/license-Open-brightgreen) 
 
 <br/>
 This application is covered by the Open license. 
 ## Contributing
  Luis Feliz 
-## Tests
+## TEST
  n/a
-## Questions
+## QUESTIONS
  luisfeliz@gmail.com<br />
 
  <br />
