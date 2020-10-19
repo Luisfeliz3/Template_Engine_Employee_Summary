@@ -1,8 +1,10 @@
 const path = require("path");
 const fs = require("fs");
+const generateHTML = require("../lib/main");
+
 
 const templatesDir = path.resolve(__dirname, "../templates");
-console.log("We are on the WAY TO RTHAR QQQ!!!!!S");
+// console.log("We are on the WAY TO RTHAR QQQ!!!!!S");
 const render = employees => {
   const html = [];
   html.push(employees
@@ -55,14 +57,27 @@ const renderIntern = intern => {
 };
 
 const renderMain = html => {
-  console.log(templatesDir + "RENDERING MAIN");
+  // console.log(templatesDir + "RENDERING MAIN");
   const template = fs.readFileSync(path.resolve(templatesDir, "main.html"), "utf8");
   return replacePlaceholders(template, "team", html);
 };
 
 const replacePlaceholders = (template, placeholder, value) => {
+  // console.log(templatesDir + "RENDERING MAIN");
   const pattern = new RegExp("{{ " + placeholder + " }}", "gm");
   return template.replace(pattern, value);
 };
+
+
+
+const eHTML = generateHTML(render);
+
+fs.writeFileSync("./index.html", eHTML, function(err){
+    if (err) {
+        return console.log(err)
+    }
+});
+
+
 
 module.exports = render;

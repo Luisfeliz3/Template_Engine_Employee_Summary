@@ -8,7 +8,10 @@ const chalk = require("chalk");
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
-const renderMain = require("./lib/htmlRenderer");
+
+const main = require("./lib/main");
+
+
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
@@ -51,6 +54,33 @@ const start = () =>{
       quit();
     }
   });
+
+    
+}
+
+const   quit =()=> {
+  console.log("\nGoodbye!");
+  process.exit(0);
+}
+
+const startOver= () => {
+  inquirer
+  .prompt([
+    {
+      type: "confirm",
+      name: "choice",
+      message: "Would you like to Add another Employee ?",
+    },
+  ])
+  .then((val) => {
+    if (val.choice) {
+      console.log("Okay !! Let's Add another Employee!");
+      start();
+    } else {
+      quit();
+    }
+  });
+
 }
 
 const choiceOfRoles = () => {
@@ -96,7 +126,6 @@ const choiceOfRoles = () => {
     });
 }
 
-
 const manager = (manager)=> {
   inquirer
     .prompt([
@@ -110,12 +139,13 @@ const manager = (manager)=> {
        
       // console.log(manager.name + manager.roles + manager.id + manager.email);
       // name, employeeType, id, email
-    const teamManager = new Manager(manager.name, manager.roles, manager.id ,manager.email,val.officeNum);
+    const teamManager = new Manager(manager.name, manager.id ,manager.email,val.officeNum);
     managerArr.push(teamManager)
     render(managerArr);
-    // console.log(renderMain(managerArr));
-  
+    start();
+   
     });
+    
 }
 
 const intern = (intern) => {
@@ -129,11 +159,10 @@ const intern = (intern) => {
     ])
     .then((val) => {
       // console.log(val, intern);
-      const teamIntern = new Intern(intern.name, intern.roles, intern.id ,intern.email,val.school);
+      const teamIntern = new Intern(intern.name, intern.id ,intern.email,val.school);
       internArr.push(teamIntern);
       render(internArr);
-      console.log(renderMain(internArr));
-
+      start();
     });
 }
 
@@ -148,17 +177,30 @@ const engineer = (engineer)=> {
     ])
     .then((val) => {
       // console.log(val, engineer);
-      const teamEngineer = new Engineer(engineer.name, engineer.roles, engineer.id ,engineer.email,val.gitHub);
+      const teamEngineer = new Engineer(engineer.name, engineer.id ,engineer.email,val.gitHub);
       engineerArr.push(teamEngineer);
       render(engineerArr);
-      console.log(renderMain(engineerArr));
-     
-
-
+      start();
     });
 }
 
+
+
 start();
+
+
+
+const createHtml = main(render(managerArr),render(engineerArr),render(internArr));
+
+
+fs.writeFile("./index.html", createHtml, function(err){
+  if (err) {
+      return console.log(err)
+  }
+});
+
+
+
 
 
 
