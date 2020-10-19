@@ -190,7 +190,7 @@ start();
 
 
 
-const createHtml = main(render(managerArr),render(engineerArr),render(internArr));
+const createHtml = main(managerArr,engineerArr,internArr);
 
 
 fs.writeFile("./index.html", createHtml, function(err){
