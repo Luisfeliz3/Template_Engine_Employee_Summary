@@ -9,6 +9,8 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 
+const util = require("util");
+const writeFileAsync = util.promisify(fs.writeFile);
 const main = require("./lib/main");
 
 
@@ -38,7 +40,7 @@ const main = require("./lib/main");
 const managerArr = [];
 const engineerArr = [];
 const internArr = [];
-const start = () =>{
+const promptUser = () =>{
   inquirer
   .prompt([
     {
@@ -141,8 +143,9 @@ const manager = (manager)=> {
       // name, employeeType, id, email
     const teamManager = new Manager(manager.name, manager.id ,manager.email,val.officeNum);
     managerArr.push(teamManager)
-    render(managerArr);
+
     start();
+
    
     });
     
@@ -160,8 +163,8 @@ const intern = (intern) => {
     .then((val) => {
       // console.log(val, intern);
       const teamIntern = new Intern(intern.name, intern.id ,intern.email,val.school);
-      internArr.push(teamIntern);
-      render(internArr);
+      managerArr.push(teamIntern);
+      // render(internArr);
       start();
     });
 }
@@ -171,33 +174,38 @@ const engineer = (engineer)=> {
     .prompt([
       {
         type: "input",
-        name: "officeNum",
+        name: "gitHub",
         message: "What is your git hub user name ?",
       },
     ])
     .then((val) => {
       // console.log(val, engineer);
-      const teamEngineer = new Engineer(engineer.name, engineer.id ,engineer.email,val.gitHub);
-      engineerArr.push(teamEngineer);
-      render(engineerArr);
+      const teamEngineer = new Engineer(engineer.name, engineer.id , val.gitHub, engineer.email);
+      managerArr.push(teamEngineer);
+      // render(engineerArr);
+
       start();
     });
 }
 
 
+async function start() {
+  console.log("Welcome to the Employee generator")
+  
+  try {
+await promptUser();
+            fs.unlinkSync("index.html");
+      const html = main(render(managerArr));
+
+      await writeFileAsync("index.html", html);
+
+
+  } catch (err) {
+      console.log(err);
+  }
+}
 
 start();
-
-
-
-const createHtml = main(managerArr,engineerArr,internArr);
-
-
-fs.writeFile("./index.html", createHtml, function(err){
-  if (err) {
-      return console.log(err)
-  }
-});
 
 
 
